@@ -1,0 +1,26 @@
+{
+  "name": "heaven-or-hell",
+  "version": "1.0.0",
+  "description": "A mobile-first web app that uses AI to judge your actions and move your soul toward heaven or hell",
+  "main": "app.js",
+  "scripts": {
+    "start": "npx http-server -p 3000 -c-1",
+    "serve": "npx live-server --port=3000 --no-browser",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "heaven",
+    "hell",
+    "ai",
+    "judgment",
+    "game",
+    "openai",
+    "firebase"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  }
+}

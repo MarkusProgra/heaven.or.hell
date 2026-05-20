@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Heaven or Hell</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="screen active">
+        <div class="terminal-loader">
+            <span class="cursor">_</span>
+        </div>
+        <p class="loading-text">INITIALIZING SYSTEM...</p>
+        <button id="bypass-btn" class="bypass-btn">
+            [SKIP_AUTH_AND_TEST]
+        </button>
+    </div>
+
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen">
+        <div class="logo-container">
+            <h1 class="title glitch" data-text="HEAVEN OR HELL">HEAVEN OR HELL</h1>
+            <p class="subtitle">&lt;YOUR_SOUL_AWAITS&gt;</p>
+        </div>
+        <div class="login-container">
+            <button id="google-login" class="login-btn terminal-btn">
+                <span class="btn-icon">[G]</span>
+                <span>CONNECT_WITH_GOOGLE</span>
+            </button>
+            <button id="admin-login" class="login-btn terminal-btn">
+                <span class="btn-icon">[A]</span>
+                <span>ADMIN_ACCESS</span>
+            </button>
+            <p class="warning-text">
+                &gt; WARNING: YOUR_JOURNEY_WILL_BE_RECORDED
+            </p>
+        </div>
+    </div>
+
+    <!-- Main App Screen -->
+    <div id="app-screen" class="screen">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="user-info">
+                <span class="user-avatar" id="user-avatar">U</span>
+                <span class="user-name" id="user-name">USER</span>
+            </div>
+            <button id="logout-btn" class="icon-btn">
+                <span class="icon">[LOGOUT]</span>
+            </button>
+        </header>
+
+        <!-- 3D Staircase Visualization -->
+        <div class="staircase-container">
+            <div class="staircase-header">
+                <span class="direction-indicator" id="direction-indicator">NEUTRAL_REALM</span>
+            </div>
+            <div class="staircase-viewport" id="staircase-viewport">
+                <!-- Three.js renders here -->
+            </div>
+            <div class="position-display">
+                <span class="position-label">SOUL_POSITION:</span>
+                <span class="position-value" id="position-value">0.0000%</span>
+            </div>
+            <div class="stats-row">
+                <span class="stat">LIFESPAN: <span id="lifespan-display">80_YEARS</span></span>
+                <span class="stat">DAYS_USED: <span id="days-used">0</span></span>
+                <span class="stat">DAYS_LEFT: <span id="days-left">29200</span></span>
+            </div>
+        </div>
+
+        <!-- AI Input Section -->
+        <div class="ai-section">
+            <div class="ai-header">
+                <span class="ai-indicator"></span>
+                <span>AI_CONFESSIONAL</span>
+            </div>
+            <div class="input-container">
+                <textarea
+                    id="confession-input"
+                    class="confession-input"
+                    placeholder="&gt; DESCRIBE_YOUR_ACTIONS_TODAY..."
+                    rows="4"
+                ></textarea>
+                <button id="submit-btn" class="submit-btn terminal-btn">
+                    <span>ANALYZE_SOUL</span>
+                </button>
+            </div>
+            <div id="analysis-result" class="analysis-result hidden">
+                <div class="result-header">
+                    <span class="result-icon">[DIVINE_JUDGMENT]</span>
+                </div>
+                <div class="result-content" id="result-content"></div>
+                <div class="result-movement" id="result-movement"></div>
+            </div>
+        </div>
+
+        <!-- History Log -->
+        <div class="history-section">
+            <div class="history-header">
+                <span>[SOUL_LOG]</span>
+                <button id="clear-history-btn" class="text-btn">[CLEAR]</button>
+            </div>
+            <div class="history-list" id="history-list">
+                <!-- History items will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore-compat.js"></script>
+
+    <!-- Three.js for 3D Staircase -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- App Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
