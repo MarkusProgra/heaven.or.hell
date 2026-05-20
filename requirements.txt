@@ -1,0 +1,2 @@
+# Vercel Python function dependencies
+# No external dependencies needed - using standard library only
