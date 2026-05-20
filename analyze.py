@@ -4,29 +4,36 @@ import urllib.request
 
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 
-def handler(request):
+def main(request):
     if request.method != 'POST':
-        return {'statusCode': 405, 'body': 'Method not allowed'}
+        return json.dumps({'error': 'Method not allowed'}), 405
 
-    content_length = int(request.headers.get('Content-Length', 0))
-    body = request.body.read(content_length)
+    try:
+        body = request.get_json()
+    except:
+        return json.dumps({'error': 'Invalid JSON'}), 400
 
     req = urllib.request.Request(
         'https://api.openai.com/v1/chat/completions',
-        data=body,
+        data=json.dumps(body).encode(),
         headers={
             'Content-Type': 'application/json',
             'Authorization': f'Bearer {OPENAI_API_KEY}'
         }
     )
 
-    response = urllib.request.urlopen(req, timeout=30)
-    result = response.read()
+    try:
+        response = urllib.request.urlopen(req, timeout=30)
+        result = response.read().decode()
 
-    return {
-        'statusCode': 200,
-        'body': result.decode(),
-        'headers': {
+        return json.dumps(json.loads(result)), 200, {
+            'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
         }
-    }
+    except urllib.error.HTTPError as e:
+        return json.dumps({
+            'error': 'OpenAI API error',
+            'details': e.read().decode()
+        }), e.code
+    except Exception as e:
+        return json.dumps({'error': str(e)}), 500
